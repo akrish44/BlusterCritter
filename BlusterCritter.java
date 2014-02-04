@@ -11,10 +11,14 @@ import java.util.ArrayList;
  */
 public class BlusterCritter extends Critter {
 
+    private int c;
+    private int counter = 0;
 
     public BlusterCritter() {
-        private int c = 3;
-        int counter = 0;
+
+        
+        int c = 3;
+        
     }
 
     public void processActors(ArrayList<Actor> actors) {
@@ -37,7 +41,19 @@ public class BlusterCritter extends Critter {
 
 
     public void getCritters() {
-        
+        Location loc = getLocation();
+        for (int r = loc.getRow() - 2; r<=loc.getRow() + 2; r++) {
+            for (int c = loc.getCol() - 2; c <=loc.getCol() + 2; c++) {
+                Location temp = new Location(r, c);
+                if (getGrid().isValid(temp)) {
+                    Actor a = getGrid().get(temp);
+                    if (a != null && a != this) {
+                        actors.add(a);
+                    }
+                }
+                return actors;
+            }
+        }
     }
 
     /**
