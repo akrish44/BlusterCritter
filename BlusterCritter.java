@@ -1,6 +1,7 @@
 import info.gridworld.actor.Actor;
 import info.gridworld.actor.Critter;
 import info.gridworld.grid.Location;
+import java.awt.Color;
 
 import java.util.ArrayList;
 
@@ -21,26 +22,12 @@ public class BlusterCritter extends Critter {
         
     }
 
-    public void processActors(ArrayList<Actor> actors) {
-        int n = actors.size();
-        if (n == 0)
-            return;
-        int r = (int) (Math.random() * n);
-
-        Actor other = actors.get(r);
-        setColor(other.getColor());
 
 
-        for (Actor a : actors)
-        {
-            if (a instanceof Critter) {
-                counter++;
-        }
-    }
-}
+    public ArrayList getCritters() {
 
+        ArrayList<Actor> actors = new ArrayList<Actor>(); 
 
-    public void getCritters() {
         Location loc = getLocation();
         for (int r = loc.getRow() - 2; r<=loc.getRow() + 2; r++) {
             for (int c = loc.getCol() - 2; c <=loc.getCol() + 2; c++) {
@@ -51,10 +38,59 @@ public class BlusterCritter extends Critter {
                         actors.add(a);
                     }
                 }
-                return actors;
+               
+            }
+
+        }
+        return actors;
+
+    }
+
+        public void processActors() {
+
+
+
+            int n = actors.size();
+            if (n == 0)
+                return;
+            int r = (int) (Math.random() * n);
+
+            Actor other = actors.get(r);
+            setColor(other.getColor());
+
+
+            for (Actor a : actors)
+
+            {
+                if (a instanceof Critter) {
+                    counter++;
+                    
+            }
+                if (counter < c) {
+                    lighten();
+                } else {
+                    darken();
+                }
             }
         }
-    }
+
+
+
+        public void darken() {
+             
+
+             double DARKENING_FACTOR = 0.05;
+             Color color = getColor(); 
+             int red = (int) (c.getRed() * (1 - DARKENING_FACTOR)); 
+             int green = (int) (c.getGreen() * (1 - DARKENING_FACTOR)); 
+             int blue = (int) (c.getBlue() * (1 - DARKENING_FACTOR)); 
+
+        }
+
+        public getGreen() {
+
+        }
+
 
     /**
      * Turns towards the new location as it moves.
