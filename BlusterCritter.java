@@ -9,24 +9,7 @@ import java.awt.Color;
 public class BlusterCritter extends Critter {
 
     private int c = 3;
-
-    public void processActors(ArrayList<Actor> actors)
-    {
-        int counter = 0;
-
-        for (Actor a : actors) {
-            if (a instanceof Critter) {
-                counter++;
-            }
-            if (counter < c) {
-                brighten();
-            }else {
-                darken();
-            }
-        }
-
-    }
-
+    
     public ArrayList<Actor> getActors(){
         ArrayList<Actor> actors = new ArrayList<Actor>();
 
@@ -47,6 +30,25 @@ public class BlusterCritter extends Critter {
         actors.remove(getLocation());
         return actors;
     }
+
+    public void processActors(ArrayList<Actor> actors)
+    {
+        int counter = 0;
+
+        for (Actor a : actors) {
+            if (a instanceof Critter) {
+                counter++;
+            }
+            if (counter < c) {
+                brighten();
+            }else {
+                darken();
+            }
+        }
+
+    }
+
+    
     public void brighten(){
         Color color = getColor();
 
